@@ -42,7 +42,11 @@ public class ArrayListGenerator<E> {
      */
     public static <E extends Comparable<E>> ArrayList<E> generateDescendingArray(int problemSize) {
         ArrayList<E> list = generateAscendingArray(problemSize);
-        Collections.reverse(list);
+        for (int i = 0; i < list.size() / 2; i++) {
+            E temp = list.get(i);
+            list.set(i, list.get(list.size() - 1 - i));
+            list.set(list.size() - 1 - i, temp);
+        }
         return list;
     }
 
@@ -51,6 +55,7 @@ public class ArrayListGenerator<E> {
      *
      * @param problemSize - size of the list
      */
+    @SuppressWarnings("unchecked")
     private static <E extends Comparable<E>> ArrayList<E> generateAscendingArray(int problemSize) {
         ArrayList<E> list = new ArrayList<>(problemSize);
         for (int i = 0; i < problemSize; i++) {
